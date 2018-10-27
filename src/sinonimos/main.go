@@ -29,6 +29,8 @@ func main() {
 		}
 	}
 
+	app.Version("v version", "sinonimos v0.1.0")
+
 	app.Run(os.Args)
 }
 
