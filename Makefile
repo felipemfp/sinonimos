@@ -34,3 +34,6 @@ install: dep-ensure
 
 run:
 	@GOPATH=$(GOPATH) $(GOCMD) run $(PROJECT_PATH)/main.go $(WORD)
+	
+run:
+	@GOPATH=$(GOPATH) $(GOCMD) run $(PROJECT_PATH)/main.go $(WORD)
