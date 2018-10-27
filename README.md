@@ -4,12 +4,16 @@ Find synonyms without leaving your terminal
 
 ## Installing
 
-Go to the [latest release](https://github.com/felipemfp/sinonimos-cli/releases/latest) e download the `sinonimos` binary.
-
-Then make sure to move it to somewhere in your `$PATH`, for example:
+Run this command to download the latest version of `sinonimos`:
 
 ```bash
-mv sinonimos /usr/local/bin
+sudo curl -L "https://github.com/felipemfp/sinonimos-cli/releases/download/v0.1.0/sinonimos" -o /usr/local/bin/sinonimos
+```
+
+Apply executable permissions to the binary:
+
+```bash
+sudo chmod +x /usr/local/bin/sinonimos
 ```
 
 Now you're ready to use `sinonimos`
