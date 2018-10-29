@@ -29,6 +29,11 @@ func main() {
 	)
 
 	app.Action = func() {
+		if *word == "" {
+			fmt.Fprintln(os.Stderr, "Error: incorrect usage");
+			app.PrintHelp()
+			os.Exit(1)
+		}
 		fmt.Printf("Buscando sinônimos para \"%s\":\n", *word)
 		err := find(*word)
 		if err != nil {
