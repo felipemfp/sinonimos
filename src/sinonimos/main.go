@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/briandowns/spinner"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
@@ -11,6 +13,8 @@ import (
 
 	cli "github.com/jawher/mow.cli"
 )
+
+var s = spinner.New(spinner.CharSets[12], 100 * time.Millisecond)
 
 func main() {
 	app := cli.App("sinonimos", "Encontre sinônimos")
@@ -35,10 +39,12 @@ func main() {
 }
 
 func find(word string) error {
+	s.Start()
 	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", word))
 	if err != nil {
 		return err
 	}
+	s.Stop()
 
 	body := charmap.ISO8859_1.NewDecoder().Reader(resp.Body)
 	root, err := html.Parse(body)
