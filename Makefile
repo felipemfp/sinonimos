@@ -13,10 +13,10 @@ DEP=cd $(PROJECT_PATH) && GOPATH=$(GOPATH) dep
 .PHONY: dep-ensure dep-add dep-status install run
 
 dep-ensure:
-	@cd ${PROJECT_PATH} $(DEP) ensure -v
+	@$(DEP) ensure -v
 
 dep-update:
-	@cd ${PROJECT_PATH} $(DEP) ensure -v -update $(PACKAGE)
+	@$(DEP) ensure -v -update $(PACKAGE)
 
 dep-add:
 ifdef PACKAGE
