@@ -16,7 +16,7 @@ import (
 )
 
 var name = "sinonimos"
-var version = "v0.1.0"
+var version = "v0.2.0"
 var s = spinner.New(spinner.CharSets[14], 100*time.Millisecond)
 
 func main() {
