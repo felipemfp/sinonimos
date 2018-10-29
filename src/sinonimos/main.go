@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/briandowns/spinner"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/briandowns/spinner"
 
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
@@ -14,10 +15,12 @@ import (
 	cli "github.com/jawher/mow.cli"
 )
 
-var s = spinner.New(spinner.CharSets[12], 100 * time.Millisecond)
+var name = "sinonimos"
+var version = "v0.1.0"
+var s = spinner.New(spinner.CharSets[14], 100*time.Millisecond)
 
 func main() {
-	app := cli.App("sinonimos", "Encontre sinônimos")
+	app := cli.App(name, "Encontre sinônimos")
 
 	app.Spec = "PALAVRA"
 
@@ -29,11 +32,11 @@ func main() {
 		fmt.Printf("Buscando sinônimos para \"%s\":\n", *word)
 		err := find(*word)
 		if err != nil {
-			fmt.Printf("... falhou (%s)\n", err.Error())
+			fmt.Printf("\n... falhou (%s)\n", err.Error())
 		}
 	}
 
-	app.Version("v version", "sinonimos v0.1.0")
+	app.Version("v version", fmt.Sprintf("%s %s", name, version))
 
 	app.Run(os.Args)
 }
