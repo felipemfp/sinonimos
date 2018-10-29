@@ -29,7 +29,7 @@ endif
 dep-status:
 	@$(DEP) status
 
-install: dep-ensure
+install:
 	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOCMD) build -a -installsuffix cgo -ldflags="-w -s" -o ./bin/$(PROJECT) ./src/$(PROJECT)
 
 run:
