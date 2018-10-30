@@ -1,0 +1,53 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.10.3
+    working_directory: /go/src/github.com/felipemfp/sinonimos
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "src/sinonimos/Gopkg.lock" }}
+
+      - run: go get -u golang.org/x/lint/golint
+      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: make dep-ensure
+      - run: make lint
+      - run: make install
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "src/sinonimos/Gopkg.lock" }}
+          paths:
+            - src/sinonimos/vendor
+
+      - persist_to_workspace:
+          root: bin
+          paths:
+            - sinonimos
+
+  release:
+    docker:
+      - image: cibuilds/github:0.10
+    working_directory: /go/src/github.com/felipemfp/sinonimos
+    steps:
+      - attach_workspace:
+          at: ./bin
+      - run: ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ./bin/
+
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - build:
+          filters: # required since `release` has tag filters AND requires `build`
+            tags:
+              only: /.*/
+      - release:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

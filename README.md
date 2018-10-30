@@ -1,10 +1,8 @@
-# 🇧🇷 sinonimos
+# 🇧🇷 sinonimos [![CircleCI](https://circleci.com/gh/felipemfp/sinonimos-cli.svg?style=shield)](https://circleci.com/gh/felipemfp/sinonimos-cli)
 
 Find synonyms without leaving your terminal
 
 ![Alt Text](sinonimos-peek.gif)
-
-
 
 ## Installing
 
@@ -34,8 +32,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to start hacking:
 
-* [go](https://golang.org/doc/install)
-* [golang/dep](https://github.com/golang/dep/blob/master/docs/installation.md)
+- [go](https://golang.org/doc/install)
+- [golang/dep](https://github.com/golang/dep/blob/master/docs/installation.md)
+- [golang/lint](https://github.com/golang/lint#installation)
 
 ### Getting started
 
@@ -55,16 +54,17 @@ make dep-ensure
 Now you're ready to go.
 
 > See `Makefile` for useful development scripts, for example:
+>
 > ```
 > make run WORD=camisa
-> ``` 
+> ```
+>
 > It'll run the project and try to find synonyms for "camisa".
-
 
 ## Built With
 
-* [mow.cli](https://github.com/jawher/mow.cli)
-* [scrape](https://github.com/yhat/scrape)
+- [mow.cli](https://github.com/jawher/mow.cli)
+- [scrape](https://github.com/yhat/scrape)
 
 ## Contributing
 
@@ -72,11 +72,11 @@ Please feel free for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/felipemfp/sinonimos-cli/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/felipemfp/sinonimos-cli/tags).
 
 ## Authors
 
-* **Felipe Pontes** - *Initial work* - [felipemfp](https://github.com/felipemfp)
+- **Felipe Pontes** - _Initial work_ - [felipemfp](https://github.com/felipemfp)
 
 See also the list of [contributors](https://github.com/felipemfp/sinonimos-cli/contributors) who participated in this project.
 
