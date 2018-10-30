@@ -6,6 +6,8 @@ import (
 	"os"
 	"time"
 
+	"golang.org/x/net/html/atom"
+
 	"github.com/briandowns/spinner"
 	"github.com/logrusorgru/aurora"
 
@@ -66,12 +68,21 @@ func find(word string) error {
 		return err
 	}
 
+	synonymMatcher := func(n *html.Node) bool {
+		if n.DataAtom == atom.A || n.DataAtom == atom.Span {
+			if n.Parent != nil {
+				return scrape.Attr(n.Parent, "class") == "sinonimos"
+			}
+		}
+		return false
+	}
+
 	meaningSections := scrape.FindAll(root, scrape.ByClass("s-wrapper"))
 	for j, meaningSection := range meaningSections {
 		if meaning, ok := scrape.Find(meaningSection, scrape.ByClass("sentido")); ok {
 			fmt.Printf("\n> %s\n", aurora.Colorize(scrape.Text(meaning), getColors(j)).Bold())
 
-			synonyms := scrape.FindAll(meaningSection, scrape.ByClass("sinonimo"))
+			synonyms := scrape.FindAll(meaningSection, synonymMatcher)
 			fmt.Print("  ")
 			for i, synonym := range synonyms {
 				fmt.Print(scrape.Text(synonym))
