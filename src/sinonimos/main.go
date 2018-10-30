@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/briandowns/spinner"
-	. "github.com/logrusorgru/aurora"
+	"github.com/logrusorgru/aurora"
 
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
@@ -67,15 +67,14 @@ func find(word string) error {
 	}
 
 	meaningSections := scrape.FindAll(root, scrape.ByClass("s-wrapper"))
-	for _, meaningSection := range meaningSections {
+	for j, meaningSection := range meaningSections {
 		if meaning, ok := scrape.Find(meaningSection, scrape.ByClass("sentido")); ok {
-			fmt.Printf("\n> %s\n", scrape.Text(meaning))
+			fmt.Printf("\n> %s\n", aurora.Colorize(scrape.Text(meaning), getColors(j)).Bold())
 
 			synonyms := scrape.FindAll(meaningSection, scrape.ByClass("sinonimo"))
 			fmt.Print("  ")
 			for i, synonym := range synonyms {
-				output := fmt.Sprintf("%s", scrape.Text(synonym))
-				fmt.Print(Colorize(output, getColors(i)))
+				fmt.Print(scrape.Text(synonym))
 				if i == (len(synonyms) - 1) {
 					fmt.Print("\n")
 				} else {
@@ -88,8 +87,14 @@ func find(word string) error {
 	return nil
 }
 
-func getColors(index int) Color {
-	colors := [6]Color{RedFg, GreenFg, BrownFg, BlueFg, MagentaFg, CyanFg}
+func getColors(index int) aurora.Color {
+	colors := []aurora.Color{
+		aurora.GreenFg,
+		aurora.BrownFg,
+		aurora.BlueFg,
+		aurora.MagentaFg,
+		aurora.CyanFg,
+	}
 	if index != 0 {
 		index = index % len(colors)
 	}
