@@ -2,6 +2,10 @@
 
 Find synonyms without leaving your terminal
 
+![Alt Text](sinonimos-peek.gif)
+
+
+
 ## Installing
 
 Run this command to download the latest version of `sinonimos`:
