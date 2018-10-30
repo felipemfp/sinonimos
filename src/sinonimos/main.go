@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	. "github.com/logrusorgru/aurora"
-
-	"github.com/briandowns/spinner"
 	"net/http"
 	"os"
 	"time"
 
+	. "github.com/logrusorgru/aurora"
+
+	"github.com/briandowns/spinner"
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
 	"golang.org/x/text/encoding/charmap"
