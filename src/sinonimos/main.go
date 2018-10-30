@@ -81,16 +81,18 @@ func find(word string) error {
 	for j, meaningSection := range meaningSections {
 		if meaning, ok := scrape.Find(meaningSection, scrape.ByClass("sentido")); ok {
 			fmt.Printf("\n> %s\n", aurora.Colorize(scrape.Text(meaning), getColors(j)).Bold())
-
-			synonyms := scrape.FindAll(meaningSection, synonymMatcher)
 			fmt.Print("  ")
-			for i, synonym := range synonyms {
-				fmt.Print(scrape.Text(synonym))
-				if i == (len(synonyms) - 1) {
-					fmt.Print("\n")
-				} else {
-					fmt.Print(", ")
-				}
+		} else {
+			fmt.Print("\n - ")
+		}
+
+		synonyms := scrape.FindAll(meaningSection, synonymMatcher)
+		for i, synonym := range synonyms {
+			fmt.Print(scrape.Text(synonym))
+			if i == (len(synonyms) - 1) {
+				fmt.Print("\n")
+			} else {
+				fmt.Print(", ")
 			}
 		}
 	}
