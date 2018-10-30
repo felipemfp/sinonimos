@@ -56,7 +56,7 @@ func find(word string) error {
 	s.Stop()
 
 	if resp.StatusCode == http.StatusNotFound {
-		fmt.Printf("  %s\n", Red("Desculpa, mas não encontramos nenhum sinônimo"))
+		fmt.Printf("  %s\n", aurora.Red("Desculpa, mas não encontramos nenhum sinônimo"))
 		os.Exit(1)
 	}
 
