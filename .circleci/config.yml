@@ -10,6 +10,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "src/sinonimos/Gopkg.lock" }}
 
+      - run: go get -u golang.org/x/lint/golint
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: make dep-ensure
       - run: make lint
