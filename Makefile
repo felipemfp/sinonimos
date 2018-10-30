@@ -10,7 +10,7 @@ DEP=cd $(PROJECT_PATH) && GOPATH=$(GOPATH) dep
 
 .DEFAULT_GOAL: install
 
-.PHONY: dep-ensure dep-add dep-status install run
+.PHONY: dep-ensure dep-update dep-add dep-status install run
 
 dep-ensure:
 	@$(DEP) ensure -v
@@ -34,3 +34,9 @@ install: dep-ensure
 
 run:
 	@GOPATH=$(GOPATH) $(GOCMD) run $(PROJECT_PATH)/main.go $(WORD)
+
+vet:
+	@GOPATH=$(GOPATH) $(GOCMD) vet ./src/$(PROJECT)
+
+lint: vet
+	@GOPATH=$(GOPATH) golint -set_exit_status ./src/$(PROJECT)
