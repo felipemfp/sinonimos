@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/briandowns/spinner"
+	. "github.com/logrusorgru/aurora"
 
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
@@ -30,7 +31,7 @@ func main() {
 
 	app.Action = func() {
 		if *word == "" {
-			fmt.Fprintln(os.Stderr, "Error: incorrect usage");
+			fmt.Fprintln(os.Stderr, "Error: incorrect usage")
 			app.PrintHelp()
 			os.Exit(1)
 		}
@@ -68,7 +69,8 @@ func find(word string) error {
 			synonyms := scrape.FindAll(meaningSection, scrape.ByClass("sinonimo"))
 			fmt.Print("  ")
 			for i, synonym := range synonyms {
-				fmt.Printf("%s", scrape.Text(synonym))
+				output := fmt.Sprintf("%s", scrape.Text(synonym))
+				fmt.Print(Colorize(output, getColors(i)))
 				if i == (len(synonyms) - 1) {
 					fmt.Print("\n")
 				} else {
@@ -79,4 +81,12 @@ func find(word string) error {
 	}
 
 	return nil
+}
+
+func getColors(index int) Color {
+	colors := [6]Color{RedFg, GreenFg, BrownFg, BlueFg, MagentaFg, CyanFg}
+	if index != 0 {
+		index = index % len(colors)
+	}
+	return colors[index]
 }
