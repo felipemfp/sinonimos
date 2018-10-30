@@ -9,7 +9,7 @@ Find synonyms without leaving your terminal
 Run this command to download the latest version of `sinonimos`:
 
 ```bash
-sudo curl -L "https://github.com/felipemfp/sinonimos-cli/releases/download/v0.3.0/sinonimos" -o /usr/local/bin/sinonimos
+sudo curl -L "https://github.com/felipemfp/sinonimos-cli/releases/download/v0.3.1/sinonimos" -o /usr/local/bin/sinonimos
 ```
 
 Apply executable permissions to the binary:
