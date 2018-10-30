@@ -1,4 +1,4 @@
-# 🇧🇷 sinonimos
+# 🇧🇷 sinonimos [![CircleCI](https://circleci.com/gh/felipemfp/sinonimos-cli.svg?style=shield)](https://circleci.com/gh/felipemfp/sinonimos-cli)
 
 Find synonyms without leaving your terminal
 
