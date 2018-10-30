@@ -55,6 +55,11 @@ func find(word string) error {
 	}
 	s.Stop()
 
+	if resp.StatusCode == http.StatusNotFound {
+		fmt.Printf("  %s\n", Red("Desculpa, mas não encontramos nenhum sinônimo"))
+		os.Exit(1)
+	}
+
 	body := charmap.ISO8859_1.NewDecoder().Reader(resp.Body)
 	root, err := html.Parse(body)
 	if err != nil {
