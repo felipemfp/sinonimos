@@ -33,7 +33,7 @@ install: dep-ensure
 	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOCMD) build -a -installsuffix cgo -ldflags="-w -s" -o ./bin/$(PROJECT) ./src/$(PROJECT)
 
 run:
-	@GOPATH=$(GOPATH) $(GOCMD) run $(PROJECT_PATH)/main.go $(WORD)
+	@GOPATH=$(GOPATH) $(GOCMD) run $(PROJECT_PATH)/main.go $(EXPRESSION)
 
 vet:
 	@GOPATH=$(GOPATH) $(GOCMD) vet ./src/$(PROJECT)

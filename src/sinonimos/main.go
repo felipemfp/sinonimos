@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"golang.org/x/net/html/atom"
@@ -25,20 +26,25 @@ var s = spinner.New(spinner.CharSets[14], 100*time.Millisecond)
 func main() {
 	app := cli.App(name, "Encontre sinônimos")
 
-	app.Spec = "PALAVRA"
+	app.Spec = "EXPRESSAO..."
 
 	var (
-		word = app.StringArg("PALAVRA", "", "Palavra para encontrar sinônimos")
+		expressionArr = app.StringsArg("EXPRESSAO", nil, "EXPRESSAO para encontrar sinônimos")
 	)
 
 	app.Action = func() {
-		if *word == "" {
+
+		var expression = new(string)
+
+		*expression = strings.Join(*expressionArr, "-")
+
+		if *expression == "" {
 			fmt.Fprintln(os.Stderr, "Error: incorrect usage")
 			app.PrintHelp()
 			os.Exit(1)
 		}
-		fmt.Printf("Buscando sinônimos para \"%s\":\n", *word)
-		err := find(*word)
+		fmt.Printf("Buscando sinônimos para \"%s\":\n", strings.Join(*expressionArr, " "))
+		err := find(*expression)
 		if err != nil {
 			fmt.Printf("\n... falhou (%s)\n", err.Error())
 		}
@@ -49,9 +55,9 @@ func main() {
 	app.Run(os.Args)
 }
 
-func find(word string) error {
+func find(expression string) error {
 	s.Start()
-	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", word))
+	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", expression))
 	if err != nil {
 		return err
 	}
