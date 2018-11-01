@@ -20,7 +20,7 @@ import (
 )
 
 var name = "sinonimos"
-var version = "v0.3.1"
+var version = "dev"
 var s = spinner.New(spinner.CharSets[14], 100*time.Millisecond)
 
 func main() {
@@ -87,12 +87,12 @@ func find(expression string) error {
 	for j, meaningSection := range meaningSections {
 		if meaning, ok := scrape.Find(meaningSection, scrape.ByClass("sentido")); ok {
 			fmt.Printf("\n> %s\n", aurora.Colorize(scrape.Text(meaning), getColors(j)).Bold())
-			fmt.Print("  ")
 		} else {
-			fmt.Print("\n - ")
+			fmt.Print("\n> -\n")
 		}
 
 		synonyms := scrape.FindAll(meaningSection, synonymMatcher)
+		fmt.Print("  ")
 		for i, synonym := range synonyms {
 			fmt.Print(scrape.Text(synonym))
 			if i == (len(synonyms) - 1) {

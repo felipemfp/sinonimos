@@ -110,6 +110,7 @@
     "github.com/logrusorgru/aurora",
     "github.com/yhat/scrape",
     "golang.org/x/net/html",
+    "golang.org/x/net/html/atom",
     "golang.org/x/text/encoding/charmap",
   ]
   solver-name = "gps-cdcl"
