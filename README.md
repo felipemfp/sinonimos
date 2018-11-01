@@ -2,7 +2,7 @@
 
 Find synonyms without leaving your terminal
 
-![Alt Text](sinonimos-peek.gif)
+![Preview](sinonimos-peek.gif)
 
 ## Installing
 
