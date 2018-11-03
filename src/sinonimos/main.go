@@ -9,6 +9,7 @@ import (
 
 	"golang.org/x/net/html/atom"
 
+	"github.com/metal3d/go-slugify"
 	"github.com/briandowns/spinner"
 	"github.com/logrusorgru/aurora"
 
@@ -57,7 +58,7 @@ func main() {
 
 func find(expression string) error {
 	s.Start()
-	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", expression))
+	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slugify.Marshal(expression)))
 	if err != nil {
 		return err
 	}

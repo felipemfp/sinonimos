@@ -60,6 +60,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:dd3774cf72106476c4135a27442e4ca960ca93a347e97ad49366359b49f8b920"
+  name = "github.com/metal3d/go-slugify"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "7ac2014b2f23e254684c08d597496681d12c6a8a"
+
+[[projects]]
+  branch = "master"
   digest = "1:b2870406be2bcadb03d4d9e90e99ec171aac87d9fa7fe15efffec3224cae9c5c"
   name = "github.com/yhat/scrape"
   packages = ["."]
@@ -108,6 +116,7 @@
     "github.com/briandowns/spinner",
     "github.com/jawher/mow.cli",
     "github.com/logrusorgru/aurora",
+    "github.com/metal3d/go-slugify",
     "github.com/yhat/scrape",
     "golang.org/x/net/html",
     "golang.org/x/net/html/atom",
