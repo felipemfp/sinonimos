@@ -12,6 +12,8 @@ Run this command to download the latest version of `sinonimos`:
 curl https://raw.githubusercontent.com/felipemfp/sinonimos-cli/master/install.sh -s | bash
 ```
 
+> See [`install.sh`](install.sh) to know what’s happening under the hood.
+
 Now you're ready to use `sinonimos`
 
 ```bash
