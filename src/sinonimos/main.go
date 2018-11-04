@@ -9,9 +9,9 @@ import (
 
 	"golang.org/x/net/html/atom"
 
-	"github.com/metal3d/go-slugify"
 	"github.com/briandowns/spinner"
 	"github.com/logrusorgru/aurora"
+	"github.com/metal3d/go-slugify"
 
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
@@ -34,20 +34,18 @@ func main() {
 	)
 
 	app.Action = func() {
+		expression := strings.Join(*expressionArr, " ")
 
-		var expression = new(string)
-
-		*expression = strings.Join(*expressionArr, "-")
-
-		if *expression == "" {
+		if expression == "" {
 			fmt.Fprintln(os.Stderr, "Error: incorrect usage")
 			app.PrintHelp()
 			os.Exit(1)
 		}
-		fmt.Printf("Buscando sinônimos para \"%s\":\n", strings.Join(*expressionArr, " "))
-		err := find(*expression)
+
+		fmt.Printf("Buscando sinônimos para \"%s\":\n", expression)
+		err := find(expression)
 		if err != nil {
-			fmt.Printf("\n... falhou (%s)\n", err.Error())
+			fmt.Print(aurora.Red(fmt.Sprintf("\n... falhou (%s)\n", err.Error())))
 		}
 	}
 
@@ -59,10 +57,10 @@ func main() {
 func find(expression string) error {
 	s.Start()
 	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slugify.Marshal(expression)))
+	s.Stop()
 	if err != nil {
 		return err
 	}
-	s.Stop()
 
 	if resp.StatusCode == http.StatusNotFound {
 		fmt.Printf("  %s\n", aurora.Red("Desculpa, mas não encontramos nenhum sinônimo"))
@@ -78,7 +76,7 @@ func find(expression string) error {
 	synonymMatcher := func(n *html.Node) bool {
 		if n.DataAtom == atom.A || n.DataAtom == atom.Span {
 			if n.Parent != nil {
-				return scrape.Attr(n.Parent, "class") == "sinonimos"
+				return scrape.Attr(n.Parent, "class") == "sinonimos" && scrape.Attr(n, "class") != "exemplo"
 			}
 		}
 		return false
@@ -101,6 +99,11 @@ func find(expression string) error {
 			} else {
 				fmt.Print(", ")
 			}
+		}
+
+		examples := scrape.FindAll(meaningSection, scrape.ByClass("exemplo"))
+		for _, example := range examples {
+			fmt.Print(aurora.Gray(fmt.Sprintf("  + %s\n", scrape.Text(example))))
 		}
 	}
 
