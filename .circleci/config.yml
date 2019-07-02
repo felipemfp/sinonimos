@@ -3,24 +3,22 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.10.3
-    working_directory: /go/src/github.com/felipemfp/sinonimos
+      - image: circleci/golang:1.12
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "src/sinonimos/Gopkg.lock" }}
-
-      - run: go get -u golang.org/x/lint/golint
-      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-      - run: make dep-ensure
+          keys:
+            - deps-{{ .Branch }}-{{ checksum "go.sum" }}
+            - deps-{{ .Branch }}-
+            - deps-
+      - run: go get golang.org/x/lint/golint
+      - run: go mod download
       - run: make lint
       - run: make install
-
       - save_cache:
-          key: dependency-cache-{{ checksum "src/sinonimos/Gopkg.lock" }}
+          key: deps-{{ .Branch }}-{{ checksum "go.sum" }}
           paths:
-            - src/sinonimos/vendor
-
+            - /go/pkg/mod
       - persist_to_workspace:
           root: bin
           paths:
@@ -29,7 +27,6 @@ jobs:
   release:
     docker:
       - image: cibuilds/github:0.10
-    working_directory: /go/src/github.com/felipemfp/sinonimos
     steps:
       - attach_workspace:
           at: ./bin
