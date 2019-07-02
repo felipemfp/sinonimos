@@ -1,9 +1,9 @@
 # 🇧🇷 sinonimos
 
 [![CircleCI](https://circleci.com/gh/felipemfp/sinonimos.svg?style=shield)](https://circleci.com/gh/felipemfp/sinonimos)
-[![Go Report Card](https://goreportcard.com/badge/github.com/felipemfp/sinonimmos)](https://goreportcard.com/report/github.com/felipemfp/sinonimmos)
-[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=shield)](http://godoc.org/github.com/felipemfp/sinonimmos)
-[![Release](https://img.shields.io/github/release/felipemfp/sinonimmos.svg?style=shield)](https://github.com/felipemfp/sinonimmos/releases/latest)
+[![Go Report Card](https://goreportcard.com/badge/github.com/felipemfp/sinonimos)](https://goreportcard.com/report/github.com/felipemfp/sinonimos)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=shield)](http://godoc.org/github.com/felipemfp/sinonimos)
+[![Release](https://img.shields.io/github/release/felipemfp/sinonimos.svg?style=shield)](https://github.com/felipemfp/sinonimos/releases/latest)
 
 Find synonyms (for pt-BR) without leaving your terminal.
 
