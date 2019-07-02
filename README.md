@@ -1,6 +1,11 @@
-# 🇧🇷 sinonimos [![CircleCI](https://circleci.com/gh/felipemfp/sinonimos-cli.svg?style=shield)](https://circleci.com/gh/felipemfp/sinonimos-cli)
+# 🇧🇷 sinonimos
 
-Find synonyms without leaving your terminal
+[![CircleCI](https://circleci.com/gh/felipemfp/sinonimos.svg?style=shield)](https://circleci.com/gh/felipemfp/sinonimos)
+[![Go Report Card](https://goreportcard.com/badge/github.com/felipemfp/sinonimmos)](https://goreportcard.com/report/github.com/felipemfp/sinonimmos)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=shield)](http://godoc.org/github.com/felipemfp/sinonimmos)
+[![Release](https://img.shields.io/github/release/felipemfp/sinonimmos.svg?style=shield)](https://github.com/felipemfp/sinonimmos/releases/latest)
+
+Find synonyms (for pt-BR) without leaving your terminal.
 
 ![Preview](sinonimos-peek.gif)
 
@@ -9,10 +14,8 @@ Find synonyms without leaving your terminal
 Run this command to download the latest version of `sinonimos`:
 
 ```bash
-curl https://raw.githubusercontent.com/felipemfp/sinonimos-cli/master/install.sh -s | bash
+go get github.com/felipemfp/sinonimos/...
 ```
-
-> See [`install.sh`](install.sh) to know what’s happening under the hood.
 
 Now you're ready to use `sinonimos`
 
@@ -29,7 +32,6 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to start hacking:
 
 - [go](https://golang.org/doc/install)
-- [golang/dep](https://github.com/golang/dep/blob/master/docs/installation.md)
 - [golang/lint](https://github.com/golang/lint#installation)
 
 ### Getting started
@@ -37,25 +39,25 @@ What things you need to start hacking:
 First [fork](https://guides.github.com/activities/forking/) and clone the project to your machine:
 
 ```
-git clone https://github.com/{your-username}/sinonimos-cli.git
+git clone https://github.com/{your-username}/sinonimos.git
 ```
 
 Then install the dependencies:
 
 ```
-cd sinonimos-cli
-make dep-ensure
+cd sinonimos
+go mod download
 ```
 
 Now you're ready to go.
 
-> See `Makefile` for useful development scripts, for example:
+> For example:
 >
-> ```
-> make run WORD=camisa
+> ```bash
+> go run ./cmd/sinonimos camisa
 > ```
 >
-> It'll run the project and try to find synonyms for "camisa".
+> It'll run the CLI and try to find synonyms for "camisa".
 
 ## Built With
 
