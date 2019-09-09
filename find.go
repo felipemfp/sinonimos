@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/gosimple/slug"
 
@@ -69,19 +70,19 @@ func Find(input *FindInput) (*FindOutput, error) {
 
 	for j, meaningSection := range meaningSections {
 		if meaning, ok := scrape.Find(meaningSection, scrape.ByClass("sentido")); ok {
-			meanings[j].Description = scrape.Text(meaning)
+			meanings[j].Description = strings.TrimSpace(scrape.Text(meaning))
 		}
 
 		synonyms := scrape.FindAll(meaningSection, synonymMatcher)
 		meanings[j].Synonyms = make([]string, len(synonyms))
 		for i, synonym := range synonyms {
-			meanings[j].Synonyms[i] = scrape.Text(synonym)
+			meanings[j].Synonyms[i] = strings.TrimSpace(scrape.Text(synonym))
 		}
 
 		examples := scrape.FindAll(meaningSection, scrape.ByClass("exemplo"))
 		meanings[j].Examples = make([]string, len(examples))
 		for i, example := range examples {
-			meanings[j].Examples[i] = scrape.Text(example)
+			meanings[j].Examples[i] = strings.TrimSpace(scrape.Text(example))
 		}
 	}
 

@@ -56,7 +56,7 @@ func main() {
 
 			log.Printf("  %s\n", strings.Join(meaning.Synonyms, ", "))
 			for _, example := range meaning.Examples {
-				log.Print(color.HiWhiteString(fmt.Sprintf("  + %s\n", example)))
+				log.Print(color.HiWhiteString(fmt.Sprintf("  + %s", example)))
 			}
 		}
 	}
