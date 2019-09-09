@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/metal3d/go-slugify"
+	"github.com/gosimple/slug"
+
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
@@ -48,7 +49,7 @@ type FindOutput struct {
 
 // Find try to find meanings for an expression on sinonimos.com.br.
 func Find(input *FindInput) (*FindOutput, error) {
-	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slugify.Marshal(input.Expression)))
+	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slug.Make(input.Expression)))
 	if err != nil {
 		return nil, err
 	}
