@@ -4,8 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 
-	"github.com/metal3d/go-slugify"
+	"github.com/gosimple/slug"
+
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
@@ -48,7 +50,7 @@ type FindOutput struct {
 
 // Find try to find meanings for an expression on sinonimos.com.br.
 func Find(input *FindInput) (*FindOutput, error) {
-	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slugify.Marshal(input.Expression)))
+	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slug.Make(input.Expression)))
 	if err != nil {
 		return nil, err
 	}
@@ -68,19 +70,19 @@ func Find(input *FindInput) (*FindOutput, error) {
 
 	for j, meaningSection := range meaningSections {
 		if meaning, ok := scrape.Find(meaningSection, scrape.ByClass("sentido")); ok {
-			meanings[j].Description = scrape.Text(meaning)
+			meanings[j].Description = strings.TrimSpace(scrape.Text(meaning))
 		}
 
 		synonyms := scrape.FindAll(meaningSection, synonymMatcher)
 		meanings[j].Synonyms = make([]string, len(synonyms))
 		for i, synonym := range synonyms {
-			meanings[j].Synonyms[i] = scrape.Text(synonym)
+			meanings[j].Synonyms[i] = strings.TrimSpace(scrape.Text(synonym))
 		}
 
 		examples := scrape.FindAll(meaningSection, scrape.ByClass("exemplo"))
 		meanings[j].Examples = make([]string, len(examples))
 		for i, example := range examples {
-			meanings[j].Examples[i] = scrape.Text(example)
+			meanings[j].Examples[i] = strings.TrimSpace(scrape.Text(example))
 		}
 	}
 
