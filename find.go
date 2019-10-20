@@ -16,8 +16,10 @@ import (
 
 var (
 	// ErrNotFound is returned when an expression is not found on sinonimos.com.br.
-	ErrNotFound = errors.New("expression not found")
-	ErrHttpLayer = errors.New("an error launched when trying to access the website")
+	ErrNotFound          = errors.New("expression not found")
+	// ErrHTTPLayer is returned when internet connection is not available.
+	ErrHTTPLayer         = errors.New("an error launched when trying to access the website")
+	// ErrInvalidFormatBody is returned when body from HTML response is not valid to parse.
 	ErrInvalidFormatBody = errors.New("it was not possible to parse the received html")
 )
 
@@ -54,7 +56,7 @@ type FindOutput struct {
 func Find(input *FindInput) (*FindOutput, error) {
 	resp, err := http.Get(fmt.Sprintf("https://www.sinonimos.com.br/%s/", slug.Make(input.Expression)))
 	if err != nil {
-		return nil, ErrHttpLayer
+		return nil, ErrHTTPLayer
 	}
 
 	if resp.StatusCode == http.StatusNotFound {

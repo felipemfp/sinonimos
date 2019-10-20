@@ -40,7 +40,7 @@ func main() {
 		s.Stop()
 		if err != nil {
 			switch err {
-			case sinonimos.ErrHttpLayer:
+			case sinonimos.ErrHTTPLayer:
 				log.Fatalf("  %s\n", color.RedString("Desculpe, não foi possível obter resposta do " +
 																	"servidor do sinonimos...a internet está acessível?"))
 			case sinonimos.ErrInvalidFormatBody:
