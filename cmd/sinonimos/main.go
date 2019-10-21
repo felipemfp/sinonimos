@@ -40,6 +40,12 @@ func main() {
 		s.Stop()
 		if err != nil {
 			switch err {
+			case sinonimos.ErrHTTPLayer:
+				log.Fatalf("  %s\n", color.RedString("Desculpe, não foi possível obter resposta do " +
+																	"servidor do sinonimos...a internet está acessível?"))
+			case sinonimos.ErrInvalidFormatBody:
+				log.Fatalf("  %s\n", color.RedString("Desculpa, obtivemos uma resposta em um formato " +
+					"												inválido do servidor do sinonimos.com.br"))
 			case sinonimos.ErrNotFound:
 				log.Fatalf("  %s\n", color.RedString("Desculpa, mas não encontramos nenhum sinônimo"))
 			default:
