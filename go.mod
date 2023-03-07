@@ -10,6 +10,6 @@ require (
 	github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be // indirect
 	github.com/stretchr/testify v1.3.0 // indirect
 	github.com/yhat/scrape v0.0.0-20161128144610-24b7890b0945
-	golang.org/x/net v0.0.0-20181023162649-9b4f9f5ad519
-	golang.org/x/text v0.3.0
+	golang.org/x/net v0.7.0
+	golang.org/x/text v0.7.0
 )
